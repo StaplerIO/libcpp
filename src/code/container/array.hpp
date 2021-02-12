@@ -1,3 +1,11 @@
+#include <cstdlib>
+
+#include "../defs.hpp"
+
+#include "array_element.hpp"
+
+#define DECLARE_ARRAY_ELEMENT_POINTER (ArrayElement<T> *)malloc(sizeof(ArrayElement<T>))
+
 namespace staplerio
 {
 	namespace libcpp
@@ -10,6 +18,7 @@ namespace staplerio
 			public:
 				// Append element aster last element
 				void append(T element);
+
 				// Insert a new element at specific position
 				void insert_at(T item, size_t index);
 
@@ -42,8 +51,17 @@ namespace staplerio
 				// Check if the array has the specific element
 				bool contains(T element);
 
+				// Check if the array is empty
+				bool is_empty()
+				{
+					return count == 0;
+				}
+
 				// Get the element count (size) of the array
-				size_t count();
+				size_t size()
+				{
+					return count;
+				}
 
 				// Redirect operator [i] to at_index(i)
 				T operator[](size_t index)
@@ -51,17 +69,58 @@ namespace staplerio
 					return at_index(index);
 				}
 
-			private:
-				ArrayElement<T> elements;
+			public:
+				ArrayElement<T> *elements;
+				size_t count = 0;
 			};
 
 			template <typename T>
-			class ArrayElement
+			void Array<T>::append(T element)
 			{
-				T node;
-				T *next_node;
-				bool is_tail;
-			};
+				if (this->count == 0)
+				{
+					ArrayElement<T> *node = DECLARE_ARRAY_ELEMENT_POINTER;
+					node->is_tail = true;
+					node->node_content = element;
+					node->next_node = nullptr;
+
+					this->elements = node;
+					this->count++;
+				}
+				else
+				{
+					ArrayElement<T> *node = this->elements;
+					// Get last node
+					while (!node->is_tail)
+					{
+						node = node->next_node;
+					}
+
+					this->count++;
+
+					// Append new node after the last node
+					ArrayElement<T> *new_node = DECLARE_ARRAY_ELEMENT_POINTER;
+					new_node->next_node = nullptr;
+					new_node->node_content = element;
+					new_node->is_tail = true;
+
+					node->next_node = new_node;
+
+					node->is_tail = false;
+				}
+			}
+
+			template <typename T>
+			T Array<T>::at_index(size_t index)
+			{
+				ArrayElement<T> *node = this->elements;
+				for (size_t current_index = 0; current_index < index; current_index++)
+				{
+					node = node->next_node;
+				}
+
+				return node->node_content;
+			}
 		} // namespace container
 	}	  // namespace libcpp
 } // namespace staplerio
