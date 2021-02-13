@@ -21,5 +21,8 @@ int main()
 	array.remove_last();
 	std::cout << array.first_element() << ", " << array.last_element() << std::endl;
 
+	array.clear();
+	std::cout << array.size() << std::endl;
+
 	return 0;
 }

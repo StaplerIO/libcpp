@@ -99,8 +99,6 @@ namespace staplerio
 						node = node->next_node;
 					}
 
-					this->count++;
-
 					// Append new node after the last node
 					ArrayElement<T> *new_node = DECLARE_ARRAY_ELEMENT_POINTER;
 					new_node->next_node = nullptr;
@@ -112,6 +110,9 @@ namespace staplerio
 
 					// Remove Tail flag in previous node
 					node->is_tail = false;
+
+					// Add counter
+					this->count++;
 				}
 			}
 
@@ -177,14 +178,18 @@ namespace staplerio
 				return 0x3f3f3f3f;
 			}
 
+			// Remove the last element
 			template<typename T>
 			void Array<T>::remove_last()
 			{
 				ArrayElement<T> *node = this->elements;
-				// Get the node which its next node is the last node
-				while(!node->next_node->is_tail)
+				if(this->size() > 1)
 				{
-					node = node->next_node;
+					// Get the node which its next node is the last node
+					while(!node->next_node->is_tail)
+					{
+						node = node->next_node;
+					}
 				}
 
 				// Remove last node from memory
@@ -194,6 +199,16 @@ namespace staplerio
 
 				// Decrease array size by 1
 				this->count--;
+			}
+
+			// Remove last element recursively, until it remains none
+			template<typename T>
+			void Array<T>::clear()
+			{
+				while(this->size() > 0)
+				{
+					this->remove_last();
+				}
 			}
 		}
 	}
