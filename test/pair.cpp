@@ -1,10 +1,10 @@
 #include <cstdio>
 
-#include "../code/container/pair.hpp"
+#include "../src/container/pair.hpp"
 
 using namespace staplerio::libcpp;
 
-int main(void)
+int main()
 {
 	container::KeyValuePair<int, char> pair;
 	pair.key = 2;

@@ -1,13 +1,13 @@
 #include <iostream>
 
-#include "../code/container/array.hpp"
+#include "../src/container/array.hpp"
 
 using namespace staplerio::libcpp::container;
 
-int main(void)
+int main()
 {
 	Array<int> array;
-	for (int i = 1; i <= 10000; i++)
+	for (int i = 1; i <= 1000; i++)
 	{
 		array.append(i);
 	}
