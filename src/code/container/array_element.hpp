@@ -4,7 +4,7 @@ namespace staplerio
 	{
 		namespace container
 		{
-			template <typename T>
+			template<typename T>
 			class ArrayElement
 			{
 			public:
@@ -12,6 +12,6 @@ namespace staplerio
 				ArrayElement<T> *next_node;
 				bool is_tail;
 			};
-		} // namespace container
-	}	  // namespace libcpp
-} // namespace staplerio
+		}
+	}
+}

@@ -7,11 +7,13 @@ using namespace staplerio::libcpp::container;
 int main(void)
 {
 	Array<int> array;
-	array.append(1);
-	array.append(2);
+	for (int i = 1; i <= 10000; i++)
+	{
+		array.append(i);
+	}
 
-	std::cout << array[0] << array.at_index(1) << std::endl;
-	std::cout << array.contains(2) << "," << array.contains(0) << std::endl;
+	std::cout << array.contains(-1) << ", " << array.contains(1024) << std::endl;
+	std::cout << array[2] << array.at_index(3) << std::endl;
 	std::cout << array.size() << std::endl;
 
 	return 0;

@@ -12,7 +12,7 @@ namespace staplerio
 	{
 		namespace container
 		{
-			template <typename T>
+			template<typename T>
 			class Array
 			{
 			public:
@@ -24,26 +24,29 @@ namespace staplerio
 
 				// Remove last element
 				void remove_last();
+
 				// Remove the element at specific index
 				void remove_at(size_t index);
+
 				// Remove elements between two index
 				// example:
 				// [0, 1, 2, 3, 4, 5] remove from [2] to [5] --> [0, 1]
 				void remove_between(size_t from_index, size_t count);
+
 				// Remove all elements [equal to remove_between(0, array.count())]
 				void clear();
 
 				// Get the first element of the array
 				T first_element();
+
 				// Get the last element of the array
 				T last_element();
+
 				// Get the element at specific index
 				T at_index(size_t index);
 
 				// Get array between 2 indexes
 				void slice(size_t from_index, size_t count);
-				// Swap 2 elements at position a and b
-				void swap(size_t index_a, size_t index_b);
 
 				// Get the index of the specific element (first appear)
 				size_t index_of(T element);
@@ -69,12 +72,12 @@ namespace staplerio
 					return at_index(index);
 				}
 
-			public:
+			private:
 				ArrayElement<T> *elements;
 				size_t count = 0;
 			};
 
-			template <typename T>
+			template<typename T>
 			void Array<T>::append(T element)
 			{
 				if (this->count == 0)
@@ -104,13 +107,15 @@ namespace staplerio
 					new_node->node_content = element;
 					new_node->is_tail = true;
 
+					// Append node
 					node->next_node = new_node;
 
+					// Remove Tail flag in previous node
 					node->is_tail = false;
 				}
 			}
 
-			template <typename T>
+			template<typename T>
 			T Array<T>::at_index(size_t index)
 			{
 				ArrayElement<T> *node = this->elements;
@@ -122,7 +127,7 @@ namespace staplerio
 				return node->node_content;
 			}
 
-			template <typename T>
+			template<typename T>
 			bool Array<T>::contains(T element)
 			{
 				ArrayElement<T> *node = this->elements;
@@ -132,10 +137,11 @@ namespace staplerio
 					{
 						return true;
 					}
-				} while (!node->is_tail, node = node->next_node);
+				}
+				while (!node->is_tail, node = node->next_node);
 
 				return false;
 			}
-		} // namespace container
-	}	  // namespace libcpp
-} // namespace staplerio
+		}
+	}
+}
