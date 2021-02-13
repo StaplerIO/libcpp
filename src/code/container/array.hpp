@@ -121,6 +121,21 @@ namespace staplerio
 
 				return node->node_content;
 			}
+
+			template <typename T>
+			bool Array<T>::contains(T element)
+			{
+				ArrayElement<T> *node = this->elements;
+				do
+				{
+					if (node->node_content == element)
+					{
+						return true;
+					}
+				} while (!node->is_tail, node = node->next_node);
+
+				return false;
+			}
 		} // namespace container
 	}	  // namespace libcpp
 } // namespace staplerio

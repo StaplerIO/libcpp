@@ -11,6 +11,7 @@ int main(void)
 	array.append(2);
 
 	std::cout << array[0] << array.at_index(1) << std::endl;
+	std::cout << array.contains(2) << "," << array.contains(0) << std::endl;
 	std::cout << array.size() << std::endl;
 
 	return 0;
