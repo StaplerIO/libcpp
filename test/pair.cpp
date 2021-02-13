@@ -6,7 +6,7 @@ using namespace staplerio::libcpp;
 
 int main()
 {
-	container::KeyValuePair<int, char> pair;
+	container::KeyValuePair<int, char> pair{};
 	pair.key = 2;
 	pair.value = 'c';
 

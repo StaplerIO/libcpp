@@ -176,6 +176,25 @@ namespace staplerio
 
 				return 0x3f3f3f3f;
 			}
+
+			template<typename T>
+			void Array<T>::remove_last()
+			{
+				ArrayElement<T> *node = this->elements;
+				// Get the node which its next node is the last node
+				while(!node->next_node->is_tail)
+				{
+					node = node->next_node;
+				}
+
+				// Remove last node from memory
+				free(node->next_node);
+				node->next_node = nullptr;
+				node->is_tail = true;
+
+				// Decrease array size by 1
+				this->count--;
+			}
 		}
 	}
 }
