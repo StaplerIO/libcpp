@@ -142,6 +142,40 @@ namespace staplerio
 
 				return false;
 			}
+
+			// Equal to get element at index [count-1]
+			template<typename T>
+			T Array<T>::last_element()
+			{
+				return this->at_index(this->count - 1);
+			}
+
+			template<typename T>
+			T Array<T>::first_element()
+			{
+				return this->at_index(0);
+			}
+
+			// Return 0x3f3f3f3f if not found
+			template<typename T>
+			size_t Array<T>::index_of(T element)
+			{
+				size_t counter = 0;
+				ArrayElement<T> *node = this->elements;
+				do
+				{
+					if (node->node_content == element)
+					{
+						return counter;
+					}
+
+					counter++;
+					node = node->next_node;
+				}
+				while (!node->is_tail);
+
+				return 0x3f3f3f3f;
+			}
 		}
 	}
 }
