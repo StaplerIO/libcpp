@@ -19,7 +19,7 @@ The library has 3 parts: `algorithm`, `container`, `math`
 
 - [x] Pair
 - [ ] Array
-- [ ] Stack
+- [x] Stack
 - [ ] Queue
 - [ ] Priority Queue
 - [ ] Dictionary
