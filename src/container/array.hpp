@@ -25,8 +25,8 @@ namespace staplerio
 				// Remove last element
 				void remove_last();
 
-				// Remove the element at specific index
-				void remove_at(size_t index);
+				// Remove the element at specific target_index
+				void remove_at(size_t target_index);
 
 				// Remove elements between two index
 				// example:
@@ -202,6 +202,7 @@ namespace staplerio
 			}
 
 			// Remove last element recursively, until it remains none
+			// Warning: low efficient
 			template<typename T>
 			void Array<T>::clear()
 			{
@@ -229,6 +230,29 @@ namespace staplerio
 				ArrayElement<T> *next_node = current_node->next_node;
 				current_node->next_node = new_node;
 				new_node->next_node = next_node;
+
+				this->count++;
+			}
+
+			// Use Array<T>::remove_last if you remove tail
+			template<typename T>
+			void Array<T>::remove_at(size_t target_index)
+			{
+				ArrayElement<T> *node = this->elements;
+				for(size_t current_index = 0; current_index < target_index - 1; current_index++)
+				{
+					node = node->next_node;
+				}
+
+				// Here: node->next_node == this->index_of(target_index)
+
+				// Remove next node, connect the next after next node
+				auto next_node = node->next_node->next_node;
+
+				// Remove node from memory
+				free(node->next_node);
+				node->next_node = next_node;
+				this->count--;
 			}
 		}
 	}

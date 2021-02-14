@@ -1,1 +1,3 @@
-#define size_t unsigned int
+// Use stddef.h as the definition
+
+#include <cstddef>
