@@ -18,3 +18,12 @@ add_executable(
         src/container/node.hpp
         src/container/array.hpp
 )
+
+
+add_executable(
+        stack_test
+        test/stack.cpp
+        src/container/node.hpp
+        src/container/stack.hpp
+)
+
