@@ -1,10 +1,8 @@
-#include <cstdlib>
+#include "node.hpp"
 
 #include "../defs.hpp"
 
-#include "array_element.hpp"
-
-#define DECLARE_ARRAY_ELEMENT_POINTER (ArrayElement<T> *)malloc(sizeof(ArrayElement<T>))
+#define DECLARE_ARRAY_ELEMENT_POINTER (Node<T> *)malloc(sizeof(Node<T>))
 
 namespace staplerio
 {
@@ -31,7 +29,7 @@ namespace staplerio
 				// Remove elements between two index
 				// example:
 				// [0, 1, 2, 3, 4, 5] remove from [2] to [5] --> [0, 1]
-				void range_remove(size_t from_index, size_t len);
+				void range_remove(size_t from_index, size_t length);
 
 				// Remove all elements [equal to range_remove(0, array.count())]
 				void clear();
@@ -46,7 +44,7 @@ namespace staplerio
 				T at_index(size_t index);
 
 				// Get array between 2 indexes
-				void slice(size_t from_index, size_t count);
+				void slice(size_t from_index, size_t length);
 
 				// Get the index of the specific element (first appear)
 				size_t index_of(T element);
@@ -73,7 +71,7 @@ namespace staplerio
 				}
 
 			private:
-				ArrayElement<T> *elements;
+				Node<T> *elements;
 				size_t count = 0;
 			};
 
@@ -82,7 +80,7 @@ namespace staplerio
 			{
 				if (this->count == 0)
 				{
-					ArrayElement<T> *node = DECLARE_ARRAY_ELEMENT_POINTER;
+					Node<T> *node = DECLARE_ARRAY_ELEMENT_POINTER;
 					node->is_tail = true;
 					node->node_content = element;
 					node->next_node = nullptr;
@@ -92,7 +90,7 @@ namespace staplerio
 				}
 				else
 				{
-					ArrayElement<T> *node = this->elements;
+					Node<T> *node = this->elements;
 					// Get last node
 					while (!node->is_tail)
 					{
@@ -100,7 +98,7 @@ namespace staplerio
 					}
 
 					// Append new node after the last node
-					ArrayElement<T> *new_node = DECLARE_ARRAY_ELEMENT_POINTER;
+					Node<T> *new_node = DECLARE_ARRAY_ELEMENT_POINTER;
 					new_node->next_node = nullptr;
 					new_node->node_content = element;
 					new_node->is_tail = true;
@@ -119,7 +117,7 @@ namespace staplerio
 			template<typename T>
 			T Array<T>::at_index(size_t index)
 			{
-				ArrayElement<T> *node = this->elements;
+				Node<T> *node = this->elements;
 				for (size_t current_index = 0; current_index < index; current_index++)
 				{
 					node = node->next_node;
@@ -131,7 +129,7 @@ namespace staplerio
 			template<typename T>
 			bool Array<T>::contains(T element)
 			{
-				ArrayElement<T> *node = this->elements;
+				Node<T> *node = this->elements;
 				do
 				{
 					if (node->node_content == element)
@@ -162,7 +160,7 @@ namespace staplerio
 			size_t Array<T>::index_of(T element)
 			{
 				size_t counter = 0;
-				ArrayElement<T> *node = this->elements;
+				Node<T> *node = this->elements;
 				do
 				{
 					if (node->node_content == element)
@@ -182,7 +180,7 @@ namespace staplerio
 			template<typename T>
 			void Array<T>::remove_last()
 			{
-				ArrayElement<T> *node = this->elements;
+				Node<T> *node = this->elements;
 				if (this->size() > 1)
 				{
 					// Get the node which its next node is the last node
@@ -216,18 +214,18 @@ namespace staplerio
 			template<typename T>
 			void Array<T>::insert_after(T item, size_t target_index)
 			{
-				ArrayElement<T> *new_node = DECLARE_ARRAY_ELEMENT_POINTER;
+				Node<T> *new_node = DECLARE_ARRAY_ELEMENT_POINTER;
 				new_node->node_content = item;
 				new_node->is_tail = false;
 
-				ArrayElement<T> *current_node = this->elements;
+				Node<T> *current_node = this->elements;
 
 				for (size_t current_index = 0; current_index < target_index; current_index++)
 				{
 					current_node = current_node->next_node;
 				}
 
-				ArrayElement<T> *next_node = current_node->next_node;
+				Node<T> *next_node = current_node->next_node;
 				current_node->next_node = new_node;
 				new_node->next_node = next_node;
 
@@ -238,7 +236,7 @@ namespace staplerio
 			template<typename T>
 			void Array<T>::remove_at(size_t target_index)
 			{
-				ArrayElement<T> *node = this->elements;
+				Node<T> *node = this->elements;
 				// Locate to the node which is 1 node before target node
 				for (size_t current_index = 0; current_index < target_index - 1; current_index++)
 				{
@@ -257,12 +255,21 @@ namespace staplerio
 			}
 
 			template<typename T>
-			void Array<T>::range_remove(size_t from_index, size_t len)
+
+			void Array<T>::range_remove(size_t from_index, size_t length)
 			{
-				for (size_t counter = 0; counter < len; counter++)
+				for (size_t counter = 0; counter < length; counter++)
 				{
 					this->remove_at(from_index);
+					this->count--;
 				}
+			}
+
+			template<typename T>
+			void Array<T>::slice(size_t from_index, size_t length)
+			{
+				Node<T> *current_node = this->elements;
+
 			}
 		}
 	}

@@ -5,11 +5,11 @@ namespace staplerio
 		namespace container
 		{
 			template<typename T>
-			class ArrayElement
+			class Node
 			{
 			public:
 				T node_content;
-				ArrayElement<T> *next_node;
+				Node<T> *next_node;
 				bool is_tail;
 			};
 		}

@@ -15,6 +15,6 @@ add_executable(
 add_executable(
         array_test
         test/array.cpp
-        src/container/array_element.hpp
+        src/container/node.hpp
         src/container/array.hpp
 )
