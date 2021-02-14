@@ -20,7 +20,7 @@ namespace staplerio
 				void append(T element);
 
 				// Insert a new element at specific position
-				void insert_at(T item, size_t index);
+				void insert_after(T item, size_t target_index);
 
 				// Remove last element
 				void remove_last();
@@ -209,6 +209,26 @@ namespace staplerio
 				{
 					this->remove_last();
 				}
+			}
+
+			// Use Array<T>::append if you insert after tail
+			template<typename T>
+			void Array<T>::insert_after(T item, size_t target_index)
+			{
+				ArrayElement<T> *new_node = DECLARE_ARRAY_ELEMENT_POINTER;
+				new_node->node_content = item;
+				new_node->is_tail = false;
+
+				ArrayElement<T> *current_node = this->elements;
+
+				for(size_t current_index = 0; current_index < target_index; current_index++)
+				{
+					current_node = current_node->next_node;
+				}
+
+				ArrayElement<T> *next_node = current_node->next_node;
+				current_node->next_node = new_node;
+				new_node->next_node = next_node;
 			}
 		}
 	}
