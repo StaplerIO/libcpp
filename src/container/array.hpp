@@ -31,9 +31,9 @@ namespace staplerio
 				// Remove elements between two index
 				// example:
 				// [0, 1, 2, 3, 4, 5] remove from [2] to [5] --> [0, 1]
-				void remove_between(size_t from_index, size_t count);
+				void range_remove(size_t from_index, size_t len);
 
-				// Remove all elements [equal to remove_between(0, array.count())]
+				// Remove all elements [equal to range_remove(0, array.count())]
 				void clear();
 
 				// Get the first element of the array
@@ -183,10 +183,10 @@ namespace staplerio
 			void Array<T>::remove_last()
 			{
 				ArrayElement<T> *node = this->elements;
-				if(this->size() > 1)
+				if (this->size() > 1)
 				{
 					// Get the node which its next node is the last node
-					while(!node->next_node->is_tail)
+					while (!node->next_node->is_tail)
 					{
 						node = node->next_node;
 					}
@@ -206,7 +206,7 @@ namespace staplerio
 			template<typename T>
 			void Array<T>::clear()
 			{
-				while(this->size() > 0)
+				while (this->size() > 0)
 				{
 					this->remove_last();
 				}
@@ -222,7 +222,7 @@ namespace staplerio
 
 				ArrayElement<T> *current_node = this->elements;
 
-				for(size_t current_index = 0; current_index < target_index; current_index++)
+				for (size_t current_index = 0; current_index < target_index; current_index++)
 				{
 					current_node = current_node->next_node;
 				}
@@ -239,7 +239,8 @@ namespace staplerio
 			void Array<T>::remove_at(size_t target_index)
 			{
 				ArrayElement<T> *node = this->elements;
-				for(size_t current_index = 0; current_index < target_index - 1; current_index++)
+				// Locate to the node which is 1 node before target node
+				for (size_t current_index = 0; current_index < target_index - 1; current_index++)
 				{
 					node = node->next_node;
 				}
@@ -253,6 +254,15 @@ namespace staplerio
 				free(node->next_node);
 				node->next_node = next_node;
 				this->count--;
+			}
+
+			template<typename T>
+			void Array<T>::range_remove(size_t from_index, size_t len)
+			{
+				for (size_t counter = 0; counter < len; counter++)
+				{
+					this->remove_at(from_index);
+				}
 			}
 		}
 	}

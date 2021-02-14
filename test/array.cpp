@@ -32,5 +32,14 @@ int main()
 	array.clear();
 	std::cout << array.size() << std::endl;
 
+	for (int i = 1; i <= 40; i++)
+	{
+		array.append(i * 2);
+	}
+
+	array.range_remove(10, 10);
+	std::cout << array[9] << ", " << array[10] << std::endl;
+	std::cout << array.size();
+
 	return 0;
 }
