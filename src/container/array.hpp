@@ -2,8 +2,6 @@
 
 #include "../defs.hpp"
 
-#define DECLARE_ARRAY_ELEMENT_POINTER (Node<T> *)malloc(sizeof(Node<T>))
-
 namespace staplerio
 {
 	namespace libcpp
@@ -80,7 +78,7 @@ namespace staplerio
 			{
 				if (this->count == 0)
 				{
-					Node<T> *node = DECLARE_ARRAY_ELEMENT_POINTER;
+					auto *node = DECLARE_NODE_POINTER;
 					node->is_tail = true;
 					node->node_content = element;
 					node->next_node = nullptr;
@@ -98,7 +96,7 @@ namespace staplerio
 					}
 
 					// Append new node after the last node
-					Node<T> *new_node = DECLARE_ARRAY_ELEMENT_POINTER;
+					auto *new_node = DECLARE_NODE_POINTER;
 					new_node->next_node = nullptr;
 					new_node->node_content = element;
 					new_node->is_tail = true;
@@ -214,7 +212,7 @@ namespace staplerio
 			template<typename T>
 			void Array<T>::insert_after(T item, size_t target_index)
 			{
-				Node<T> *new_node = DECLARE_ARRAY_ELEMENT_POINTER;
+				auto *new_node = DECLARE_NODE_POINTER;
 				new_node->node_content = item;
 				new_node->is_tail = false;
 

@@ -1,3 +1,4 @@
-// Use stddef.h as the definition
-
 #include <cstddef>
+#include <cstdlib>
+
+#define DECLARE_NODE_POINTER (Node<T> *)malloc(sizeof(Node<T>))
