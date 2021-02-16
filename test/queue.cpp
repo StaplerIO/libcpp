@@ -6,5 +6,15 @@ using namespace staplerio::libcpp::container;
 
 int main()
 {
+	Queue<int> queue;
+
+	std::cout << queue.is_empty() << std::endl;
+	for (int i = 1; i <= 10; i++)
+	{
+		queue.push_tail(i);
+	}
+
+	std::cout << queue.size() << std::endl;
+
 	return 0;
 }

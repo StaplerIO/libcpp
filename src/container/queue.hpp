@@ -31,15 +31,41 @@ namespace staplerio
 				}
 
 				// Get the number of elements in current queue
-				size_t size();
+				size_t size()
+				{
+					return count;
+				}
 
 				// Remove all elements in queue
 				void clear();
 
 			private:
-				TwoWayNode<T> *elements = nullptr;
+				TwoWayNode<T> *head_element = nullptr;
+				TwoWayNode<T> *tail_element = nullptr;
 				size_t count = 0;
 			};
+
+			template<typename T>
+			void Queue<T>::push_tail(T element)
+			{
+				auto *node = DECLARE_TWO_WAY_NODE_POINTER;
+				node->next_node = nullptr;
+				node->previous_node = nullptr;
+				node->node_content = element;
+
+				if (count == 0)
+				{
+					head_element = tail_element = node;
+				}
+				else
+				{
+					tail_element->next_node = node;
+					node->previous_node = tail_element;
+					tail_element = node;
+				}
+
+				count++;
+			}
 		}
 	}
 }

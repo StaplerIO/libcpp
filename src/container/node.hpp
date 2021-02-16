@@ -16,6 +16,7 @@ namespace staplerio
 			template<typename T>
 			class TwoWayNode
 			{
+			public:
 				T node_content;
 				TwoWayNode<T> *next_node;
 				TwoWayNode<T> *previous_node;
