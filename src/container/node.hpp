@@ -19,7 +19,6 @@ namespace staplerio
 				T node_content;
 				TwoWayNode<T> *next_node;
 				TwoWayNode<T> *previous_node;
-				bool is_tail;
 			};
 		}
 	}

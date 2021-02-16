@@ -76,19 +76,19 @@ namespace staplerio
 			template<typename T>
 			void Array<T>::append(T element)
 			{
-				if (this->count == 0)
+				if (count == 0)
 				{
-					auto *node = DECLARE_NODE_POINTER;
+					auto *node = DECLARE_ONE_WAY_NODE_POINTER;
 					node->is_tail = true;
 					node->node_content = element;
 					node->next_node = nullptr;
 
-					this->elements = node;
-					this->count++;
+					elements = node;
+					count++;
 				}
 				else
 				{
-					OneWayNode<T> *node = this->elements;
+					OneWayNode<T> *node = elements;
 					// Get last node
 					while (!node->is_tail)
 					{
@@ -96,7 +96,7 @@ namespace staplerio
 					}
 
 					// Append new node after the last node
-					auto *new_node = DECLARE_NODE_POINTER;
+					auto *new_node = DECLARE_ONE_WAY_NODE_POINTER;
 					new_node->next_node = nullptr;
 					new_node->node_content = element;
 					new_node->is_tail = true;
@@ -108,14 +108,14 @@ namespace staplerio
 					node->is_tail = false;
 
 					// Add counter
-					this->count++;
+					count++;
 				}
 			}
 
 			template<typename T>
 			T Array<T>::at_index(size_t index)
 			{
-				OneWayNode<T> *node = this->elements;
+				OneWayNode<T> *node = elements;
 				for (size_t current_index = 0; current_index < index; current_index++)
 				{
 					node = node->next_node;
@@ -127,7 +127,7 @@ namespace staplerio
 			template<typename T>
 			bool Array<T>::contains(T element)
 			{
-				OneWayNode<T> *node = this->elements;
+				OneWayNode<T> *node = elements;
 				do
 				{
 					if (node->node_content == element)
@@ -144,13 +144,13 @@ namespace staplerio
 			template<typename T>
 			T Array<T>::last_element()
 			{
-				return this->at_index(this->count - 1);
+				return at_index(count - 1);
 			}
 
 			template<typename T>
 			T Array<T>::first_element()
 			{
-				return this->at_index(0);
+				return at_index(0);
 			}
 
 			// Return 0x3f3f3f3f if not found
@@ -158,7 +158,7 @@ namespace staplerio
 			size_t Array<T>::index_of(T element)
 			{
 				size_t counter = 0;
-				OneWayNode<T> *node = this->elements;
+				OneWayNode<T> *node = elements;
 				do
 				{
 					if (node->node_content == element)
@@ -178,8 +178,8 @@ namespace staplerio
 			template<typename T>
 			void Array<T>::remove_last()
 			{
-				OneWayNode<T> *node = this->elements;
-				if (this->size() > 1)
+				OneWayNode<T> *node = elements;
+				if (size() > 1)
 				{
 					// Get the node which its next node is the last node
 					while (!node->next_node->is_tail)
@@ -194,7 +194,7 @@ namespace staplerio
 				node->is_tail = true;
 
 				// Decrease array size by 1
-				this->count--;
+				count--;
 			}
 
 			// Remove last element recursively, until it remains none
@@ -202,9 +202,9 @@ namespace staplerio
 			template<typename T>
 			void Array<T>::clear()
 			{
-				while (this->size() > 0)
+				while (size() > 0)
 				{
-					this->remove_last();
+					remove_last();
 				}
 			}
 
@@ -212,11 +212,11 @@ namespace staplerio
 			template<typename T>
 			void Array<T>::insert_after(T item, size_t target_index)
 			{
-				auto *new_node = DECLARE_NODE_POINTER;
+				auto *new_node = DECLARE_ONE_WAY_NODE_POINTER;
 				new_node->node_content = item;
 				new_node->is_tail = false;
 
-				OneWayNode<T> *current_node = this->elements;
+				OneWayNode<T> *current_node = elements;
 
 				for (size_t current_index = 0; current_index < target_index; current_index++)
 				{
@@ -227,21 +227,21 @@ namespace staplerio
 				current_node->next_node = new_node;
 				new_node->next_node = next_node;
 
-				this->count++;
+				count++;
 			}
 
 			// Use Array<T>::remove_last if you remove tail
 			template<typename T>
 			void Array<T>::remove_at(size_t target_index)
 			{
-				OneWayNode<T> *node = this->elements;
+				OneWayNode<T> *node = elements;
 				// Locate to the node which is 1 node before target node
 				for (size_t current_index = 0; current_index < target_index - 1; current_index++)
 				{
 					node = node->next_node;
 				}
 
-				// Here: node->next_node == this->index_of(target_index)
+				// Here: node->next_node == index_of(target_index)
 
 				// Remove next node, connect the next after next node
 				auto next_node = node->next_node->next_node;
@@ -249,7 +249,7 @@ namespace staplerio
 				// Remove node from memory
 				free(node->next_node);
 				node->next_node = next_node;
-				this->count--;
+				count--;
 			}
 
 			template<typename T>
@@ -258,8 +258,8 @@ namespace staplerio
 			{
 				for (size_t counter = 0; counter < length; counter++)
 				{
-					this->remove_at(from_index);
-					this->count--;
+					remove_at(from_index);
+					count--;
 				}
 			}
 		}

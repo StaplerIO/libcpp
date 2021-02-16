@@ -37,38 +37,38 @@ namespace staplerio
 			template<typename T>
 			void Stack<T>::push(T element)
 			{
-				auto *new_node = DECLARE_NODE_POINTER;
+				auto *new_node = DECLARE_ONE_WAY_NODE_POINTER;
 				new_node->node_content = element;
 				new_node->next_node = nullptr;
 
-				if (this->count > 0)
+				if (count > 0)
 				{
-					auto *original_top = this->elements;
+					auto *original_top = elements;
 					new_node->next_node = original_top;
 				}
 
-				this->elements = new_node;
-				this->count++;
+				elements = new_node;
+				count++;
 			}
 
 			template<typename T>
 			T Stack<T>::pop()
 			{
-				auto top_element = this->top();
+				auto top_element = top();
 
 				if (count <= 1)
 				{
-					free(this->elements);
-					this->elements = nullptr;
-					this->count = 0;
+					free(elements);
+					elements = nullptr;
+					count = 0;
 				}
 				else
 				{
-					auto next_node = this->elements->next_node;
-					free(this->elements);
-					this->elements = next_node;
+					auto next_node = elements->next_node;
+					free(elements);
+					elements = next_node;
 
-					this->count--;
+					count--;
 				}
 
 				return top_element;
@@ -89,15 +89,15 @@ namespace staplerio
 			template<typename T>
 			T Stack<T>::top()
 			{
-				return this->elements->node_content;
+				return elements->node_content;
 			}
 
 			template<typename T>
 			void Stack<T>::clear()
 			{
-				while (!this->is_empty())
+				while (!is_empty())
 				{
-					this->pop();
+					pop();
 				}
 			}
 		}
