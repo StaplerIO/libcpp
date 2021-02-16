@@ -66,6 +66,46 @@ namespace staplerio
 
 				count++;
 			}
+
+			template<typename T>
+			T Queue<T>::head()
+			{
+				return head_element->node_content;
+			}
+
+			template<typename T>
+			T Queue<T>::tail()
+			{
+				return tail_element->node_content;
+			}
+
+			template<typename T>
+			T Queue<T>::pop_head()
+			{
+				// Get content first
+				auto content = head();
+
+				auto head_node = head_element;
+
+				// Bind head to next node
+				head_element = head_element->next_node;
+
+				// Free head from memory
+				free(head_node);
+
+				count--;
+
+				return content;
+			}
+
+			template<typename T>
+			void Queue<T>::clear()
+			{
+				while(count > 0)
+				{
+					pop_head();
+				}
+			}
 		}
 	}
 }

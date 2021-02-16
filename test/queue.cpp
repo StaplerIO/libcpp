@@ -16,5 +16,12 @@ int main()
 
 	std::cout << queue.size() << std::endl;
 
+	std::cout << queue.head() << ", " << queue.tail() << std::endl;
+
+	std::cout << queue.pop_head() << ", " << queue.head() << ", " << queue.size() << std::endl;
+
+	queue.clear();
+	std::cout << queue.size() << std::endl;
+
 	return 0;
 }
