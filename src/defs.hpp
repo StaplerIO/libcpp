@@ -1,4 +1,4 @@
 #include <cstddef>
 #include <cstdlib>
 
-#define DECLARE_NODE_POINTER (Node<T> *)malloc(sizeof(Node<T>))
+#define DECLARE_NODE_POINTER (OneWayNode<T> *)malloc(sizeof(OneWayNode<T>))

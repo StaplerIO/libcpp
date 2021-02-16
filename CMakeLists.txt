@@ -9,21 +9,20 @@ include_directories(src/container)
 add_executable(
         pair_test
         test/pair.cpp
-        src/container/pair.hpp
 )
 
 add_executable(
         array_test
         test/array.cpp
-        src/container/node.hpp
-        src/container/array.hpp
 )
 
 
 add_executable(
         stack_test
         test/stack.cpp
-        src/container/node.hpp
-        src/container/stack.hpp
 )
 
+add_executable(
+        queue_test
+        test/queue.cpp
+)

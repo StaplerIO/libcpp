@@ -69,7 +69,7 @@ namespace staplerio
 				}
 
 			private:
-				Node<T> *elements;
+				OneWayNode<T> *elements;
 				size_t count = 0;
 			};
 
@@ -88,7 +88,7 @@ namespace staplerio
 				}
 				else
 				{
-					Node<T> *node = this->elements;
+					OneWayNode<T> *node = this->elements;
 					// Get last node
 					while (!node->is_tail)
 					{
@@ -115,7 +115,7 @@ namespace staplerio
 			template<typename T>
 			T Array<T>::at_index(size_t index)
 			{
-				Node<T> *node = this->elements;
+				OneWayNode<T> *node = this->elements;
 				for (size_t current_index = 0; current_index < index; current_index++)
 				{
 					node = node->next_node;
@@ -127,7 +127,7 @@ namespace staplerio
 			template<typename T>
 			bool Array<T>::contains(T element)
 			{
-				Node<T> *node = this->elements;
+				OneWayNode<T> *node = this->elements;
 				do
 				{
 					if (node->node_content == element)
@@ -158,7 +158,7 @@ namespace staplerio
 			size_t Array<T>::index_of(T element)
 			{
 				size_t counter = 0;
-				Node<T> *node = this->elements;
+				OneWayNode<T> *node = this->elements;
 				do
 				{
 					if (node->node_content == element)
@@ -178,7 +178,7 @@ namespace staplerio
 			template<typename T>
 			void Array<T>::remove_last()
 			{
-				Node<T> *node = this->elements;
+				OneWayNode<T> *node = this->elements;
 				if (this->size() > 1)
 				{
 					// Get the node which its next node is the last node
@@ -216,14 +216,14 @@ namespace staplerio
 				new_node->node_content = item;
 				new_node->is_tail = false;
 
-				Node<T> *current_node = this->elements;
+				OneWayNode<T> *current_node = this->elements;
 
 				for (size_t current_index = 0; current_index < target_index; current_index++)
 				{
 					current_node = current_node->next_node;
 				}
 
-				Node<T> *next_node = current_node->next_node;
+				OneWayNode<T> *next_node = current_node->next_node;
 				current_node->next_node = new_node;
 				new_node->next_node = next_node;
 
@@ -234,7 +234,7 @@ namespace staplerio
 			template<typename T>
 			void Array<T>::remove_at(size_t target_index)
 			{
-				Node<T> *node = this->elements;
+				OneWayNode<T> *node = this->elements;
 				// Locate to the node which is 1 node before target node
 				for (size_t current_index = 0; current_index < target_index - 1; current_index++)
 				{

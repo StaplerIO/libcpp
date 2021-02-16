@@ -31,7 +31,7 @@ namespace staplerio
 
 			private:
 				size_t count = 0;
-				Node<T> *elements = nullptr;
+				OneWayNode<T> *elements = nullptr;
 			};
 
 			template<typename T>
