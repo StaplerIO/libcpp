@@ -42,7 +42,7 @@ namespace staplerio
 				T at_index(size_t index);
 
 				// Get array between 2 indexes
-				void slice(size_t from_index, size_t length);
+				// void slice(size_t from_index, size_t length);
 
 				// Get the index of the specific element (first appear)
 				size_t index_of(T element);
@@ -261,13 +261,6 @@ namespace staplerio
 					this->remove_at(from_index);
 					this->count--;
 				}
-			}
-
-			template<typename T>
-			void Array<T>::slice(size_t from_index, size_t length)
-			{
-				Node<T> *current_node = this->elements;
-
 			}
 		}
 	}
