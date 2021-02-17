@@ -20,14 +20,18 @@ The library has 3 parts: `algorithm`, `container`, `math`
 - [x] Pair
 - [ ] Array
 - [x] Stack
-- [ ] Queue
+- [x] Queue
 - [ ] Priority Queue
 - [ ] Dictionary
 - [ ] Tree
 
 ### Math
 
-- [ ] Sine
-- [ ] Cosine
-- [ ] Tangent
-- [ ] Cotangent
+- [ ] Trigonometric function
+- [ ] (Calculation) Square, Cube, Power
+- [ ] Random number
+- [ ] Square root
+- [ ] Log function
+- [ ] Round, ceil
+- [ ] Absolute
+- [ ] Min, max
