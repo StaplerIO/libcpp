@@ -26,3 +26,11 @@ add_executable(
         queue_test
         test/queue.cpp
 )
+
+add_library(libcpp
+        src/condition/action_result.hpp
+        src/container/array.hpp
+        src/container/node.hpp
+        src/container/pair.hpp
+        src/container/queue.hpp
+        src/container/stack.hpp)

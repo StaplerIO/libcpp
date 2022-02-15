@@ -7,7 +7,7 @@ using namespace staplerio::libcpp::container;
 int main()
 {
 	Array<int> array;
-	for (int i = 1; i <= 1000; i++)
+	for (int i = 1; i <= 100000; i++)
 	{
 		array.append(i * 2);
 	}
