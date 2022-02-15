@@ -34,3 +34,5 @@ add_library(libcpp
         src/container/pair.hpp
         src/container/queue.hpp
         src/container/stack.hpp)
+
+set_target_properties(libcpp PROPERTIES LINKER_LANGUAGE CXX)
